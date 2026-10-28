@@ -14,7 +14,111 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      contact_messages: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          message: string
+          name: string
+          subject: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          message: string
+          name: string
+          subject?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          subject?: string | null
+        }
+        Relationships: []
+      }
+      inquiries: {
+        Row: {
+          additional_requirements: string | null
+          budget_range: string | null
+          business_name: string | null
+          country: string
+          created_at: string
+          deadline: string | null
+          deliverables: string | null
+          email: string
+          full_name: string
+          id: string
+          package: string
+          phone: string
+          preferred_style: string | null
+          privacy_consent: boolean
+          project_description: string
+          project_title: string
+          reference: string
+          reference_links: string | null
+          service_category: string
+          service_details: Json
+          specific_service: string | null
+          status: string
+          target_audience: string | null
+        }
+        Insert: {
+          additional_requirements?: string | null
+          budget_range?: string | null
+          business_name?: string | null
+          country: string
+          created_at?: string
+          deadline?: string | null
+          deliverables?: string | null
+          email: string
+          full_name: string
+          id?: string
+          package: string
+          phone: string
+          preferred_style?: string | null
+          privacy_consent: boolean
+          project_description: string
+          project_title: string
+          reference: string
+          reference_links?: string | null
+          service_category: string
+          service_details?: Json
+          specific_service?: string | null
+          status?: string
+          target_audience?: string | null
+        }
+        Update: {
+          additional_requirements?: string | null
+          budget_range?: string | null
+          business_name?: string | null
+          country?: string
+          created_at?: string
+          deadline?: string | null
+          deliverables?: string | null
+          email?: string
+          full_name?: string
+          id?: string
+          package?: string
+          phone?: string
+          preferred_style?: string | null
+          privacy_consent?: boolean
+          project_description?: string
+          project_title?: string
+          reference?: string
+          reference_links?: string | null
+          service_category?: string
+          service_details?: Json
+          specific_service?: string | null
+          status?: string
+          target_audience?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
