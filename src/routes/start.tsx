@@ -47,7 +47,7 @@ const extra: Record<string, { key: string; label: string }[]> = {
 
 const field = "w-full rounded-lg border border-input bg-section px-3.5 py-2.5 text-sm placeholder:text-muted-foreground/60 focus:border-cyan focus:outline-none";
 
-function F({ label, name, error, children, required }: { label: string; name: string; error?: string; children: ReactNode; required?: boolean }) {
+function F({ label, name, error, children, required }: { label: string; name: string; error?: string | undefined; children: ReactNode; required?: boolean }) {
   return (
     <div>
       <label htmlFor={name} className="mb-1.5 block text-sm font-medium">{label}{required && <span className="text-cyan"> *</span>}</label>
@@ -129,18 +129,18 @@ function Start() {
         <fieldset className="rounded-2xl border border-border bg-card p-6 md:p-8">
           <legend className="px-2 font-display text-lg font-semibold">1. About you</legend>
           <div className="grid gap-5 md:grid-cols-2">
-            <F label="Full name" name="full_name" required error={errors.full_name}><input id="full_name" name="full_name" className={field} autoComplete="name" /></F>
-            <F label="Email" name="email" required error={errors.email}><input id="email" name="email" type="email" className={field} autoComplete="email" /></F>
-            <F label="Phone number" name="phone" required error={errors.phone}><input id="phone" name="phone" type="tel" className={field} placeholder="+91 " autoComplete="tel" /></F>
+            <F label="Full name" name="full_name" required error={errors["full_name"]}><input id="full_name" name="full_name" className={field} autoComplete="name" /></F>
+            <F label="Email" name="email" required error={errors["email"]}><input id="email" name="email" type="email" className={field} autoComplete="email" /></F>
+            <F label="Phone number" name="phone" required error={errors["phone"]}><input id="phone" name="phone" type="tel" className={field} placeholder="+91 " autoComplete="tel" /></F>
             <F label="Business name" name="business_name"><input id="business_name" name="business_name" className={field} /></F>
-            <F label="Country" name="country" required error={errors.country}><input id="country" name="country" defaultValue="India" className={field} /></F>
+            <F label="Country" name="country" required error={errors["country"]}><input id="country" name="country" defaultValue="India" className={field} /></F>
           </div>
         </fieldset>
 
         <fieldset className="rounded-2xl border border-border bg-card p-6 md:p-8">
           <legend className="px-2 font-display text-lg font-semibold">2. Service</legend>
           <div className="grid gap-5 md:grid-cols-2">
-            <F label="Service category" name="service_category" required error={errors.service_category}>
+            <F label="Service category" name="service_category" required error={errors["service_category"]}>
               <select id="service_category" value={category} onChange={(e) => setCategory(e.target.value)} className={field}>
                 <option value="">Select a service</option>
                 {services.map((s) => <option key={s.slug} value={s.slug}>{s.name}</option>)}
@@ -152,7 +152,7 @@ function Start() {
                 {svc?.items.map((i) => <option key={i}>{i}</option>)}
               </select>
             </F>
-            <F label="Package" name="package" required error={errors.package}>
+            <F label="Package" name="package" required error={errors["package"]}>
               <select id="package" name="package" defaultValue={search.package ?? "custom"} className={field}>
                 {packages.map((p) => <option key={p.id} value={p.id}>{p.name} — {p.price}</option>)}
               </select>
@@ -176,8 +176,8 @@ function Start() {
         <fieldset className="rounded-2xl border border-border bg-card p-6 md:p-8">
           <legend className="px-2 font-display text-lg font-semibold">3. Project brief</legend>
           <div className="grid gap-5 md:grid-cols-2">
-            <div className="md:col-span-2"><F label="Project title" name="project_title" required error={errors.project_title}><input id="project_title" name="project_title" className={field} /></F></div>
-            <div className="md:col-span-2"><F label="Project description" name="project_description" required error={errors.project_description}><textarea id="project_description" name="project_description" rows={5} className={field} /></F></div>
+            <div className="md:col-span-2"><F label="Project title" name="project_title" required error={errors["project_title"]}><input id="project_title" name="project_title" className={field} /></F></div>
+            <div className="md:col-span-2"><F label="Project description" name="project_description" required error={errors["project_description"]}><textarea id="project_description" name="project_description" rows={5} className={field} /></F></div>
             <F label="Target audience" name="target_audience"><input id="target_audience" name="target_audience" className={field} /></F>
             <F label="Preferred style" name="preferred_style"><input id="preferred_style" name="preferred_style" className={field} placeholder="e.g. minimal, cinematic, bold" /></F>
             <F label="Deliverables" name="deliverables"><input id="deliverables" name="deliverables" className={field} /></F>
@@ -193,7 +193,7 @@ function Start() {
             <input type="checkbox" name="privacy_consent" className="mt-1 h-4 w-4 accent-[var(--cyan)]" />
             <span>I agree that Aevyrix Creation Hub may store and use these details to respond to my inquiry, as described in the <Link to="/privacy" className="text-cyan underline">Privacy Policy</Link>.</span>
           </label>
-          {errors.privacy_consent && <p className="mt-1 text-xs text-destructive" role="alert">{errors.privacy_consent}</p>}
+          {errors["privacy_consent"] && <p className="mt-1 text-xs text-destructive" role="alert">{errors["privacy_consent"]}</p>}
         </div>
 
         <Button type="submit" variant="hero" size="lg" disabled={loading} className="w-full md:w-auto">

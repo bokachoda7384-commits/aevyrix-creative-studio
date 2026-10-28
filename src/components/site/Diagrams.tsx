@@ -67,8 +67,8 @@ export function CreativeEngine() {
       <div className="glass rounded-2xl p-8" aria-live="polite">
         <Brain className="h-8 w-8 text-cyan" />
         <p className="eyebrow mt-4">Engine module</p>
-        <h3 className="mt-2 text-2xl font-bold">{engineNodes[active].label}</h3>
-        <p className="mt-3 text-muted-foreground">{engineNodes[active].text}</p>
+        <h3 className="mt-2 text-2xl font-bold">{engineNodes[active]!.label}</h3>
+        <p className="mt-3 text-muted-foreground">{engineNodes[active]!.text}</p>
         <p className="mt-6 text-sm text-muted-foreground">Every module shares one brief, one brand system and one team — so your video, website and campaigns feel like the same brand.</p>
       </div>
     </div>
@@ -124,7 +124,7 @@ export function GrowthEcosystem() {
       </svg>
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-deep px-5 py-3 font-display text-sm font-bold shadow-glow">Your Brand</div>
       {items.map((t, i) => (
-        <span key={t} className="glass absolute -translate-x-1/2 -translate-y-1/2 rounded-full px-3 py-1.5 text-xs font-medium sm:text-sm" style={{ left: `${pos[i][0]}%`, top: `${pos[i][1]}%` }}>{t}</span>
+        <span key={t} className="glass absolute -translate-x-1/2 -translate-y-1/2 rounded-full px-3 py-1.5 text-xs font-medium sm:text-sm" style={{ left: `${pos[i]![0]}%`, top: `${pos[i]![1]}%` }}>{t}</span>
       ))}
     </div>
   );

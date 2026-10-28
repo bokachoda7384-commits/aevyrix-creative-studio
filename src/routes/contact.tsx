@@ -86,7 +86,7 @@ function Contact() {
               <div>
                 <label htmlFor="message" className="mb-1.5 block text-sm font-medium">Message <span className="text-cyan">*</span></label>
                 <textarea id="message" name="message" rows={6} className={field} />
-                {errors.message && <p className="mt-1 text-xs text-destructive">{errors.message}</p>}
+                {errors["message"] && <p className="mt-1 text-xs text-destructive">{errors["message"]}</p>}
               </div>
               <Button type="submit" variant="hero" size="lg" disabled={loading}>{loading ? <><Loader2 className="animate-spin" /> Sending…</> : "Send message"}</Button>
             </form>
