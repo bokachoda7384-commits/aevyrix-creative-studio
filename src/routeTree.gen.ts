@@ -10,7 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PrivacyRouteImport } from './routes/privacy'
@@ -18,6 +20,7 @@ import { Route as StartRouteImport } from './routes/start'
 import { Route as TeamRouteImport } from './routes/team'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as WorkRouteImport } from './routes/work'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 
@@ -26,9 +29,18 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -66,6 +78,11 @@ const WorkRoute = WorkRouteImport.update({
   path: '/work',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const ServicesIndexRoute = ServicesIndexRouteImport.update({
   id: '/services/',
   path: '/services/',
@@ -80,6 +97,7 @@ const ServicesSlugRoute = ServicesSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
@@ -87,12 +105,14 @@ export interface FileRoutesByFullPath {
   '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
   '/work': typeof WorkRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/services/': typeof ServicesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
@@ -100,13 +120,16 @@ export interface FileRoutesByTo {
   '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
   '/work': typeof WorkRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/services': typeof ServicesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
@@ -114,6 +137,7 @@ export interface FileRoutesById {
   '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
   '/work': typeof WorkRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/services/': typeof ServicesIndexRoute
 }
@@ -122,6 +146,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/auth'
     | '/contact'
     | '/pricing'
     | '/privacy'
@@ -129,12 +154,14 @@ export interface FileRouteTypes {
     | '/team'
     | '/terms'
     | '/work'
+    | '/admin'
     | '/services/$slug'
     | '/services/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/auth'
     | '/contact'
     | '/pricing'
     | '/privacy'
@@ -142,12 +169,15 @@ export interface FileRouteTypes {
     | '/team'
     | '/terms'
     | '/work'
+    | '/admin'
     | '/services/$slug'
     | '/services'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/about'
+    | '/auth'
     | '/contact'
     | '/pricing'
     | '/privacy'
@@ -155,13 +185,16 @@ export interface FileRouteTypes {
     | '/team'
     | '/terms'
     | '/work'
+    | '/_authenticated/admin'
     | '/services/$slug'
     | '/services/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
+  AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
   PricingRoute: typeof PricingRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -182,11 +215,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -238,6 +285,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WorkRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/services/': {
       id: '/services/'
       path: '/services'
@@ -255,9 +309,22 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
+  AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
   PricingRoute: PricingRoute,
   PrivacyRoute: PrivacyRoute,
