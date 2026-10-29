@@ -119,15 +119,122 @@ export type Database = {
         }
         Relationships: []
       }
+      quotations: {
+        Row: {
+          amount: number
+          created_at: string
+          created_by: string
+          currency: string
+          id: string
+          inquiry_id: string
+          scope: string
+          terms: string
+          timeline: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          created_by: string
+          currency?: string
+          id?: string
+          inquiry_id: string
+          scope: string
+          terms?: string
+          timeline: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          created_by?: string
+          currency?: string
+          id?: string
+          inquiry_id?: string
+          scope?: string
+          terms?: string
+          timeline?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quotations_inquiry_id_fkey"
+            columns: ["inquiry_id"]
+            isOneToOne: false
+            referencedRelation: "inquiries"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      site_content: {
+        Row: {
+          category: string
+          description: string
+          id: string
+          image: string
+          items: Json
+          key: string
+          kind: string
+          published: boolean
+          sort_order: number
+          title: string
+        }
+        Insert: {
+          category?: string
+          description?: string
+          id?: string
+          image?: string
+          items?: Json
+          key: string
+          kind: string
+          published?: boolean
+          sort_order?: number
+          title: string
+        }
+        Update: {
+          category?: string
+          description?: string
+          id?: string
+          image?: string
+          items?: Json
+          key?: string
+          kind?: string
+          published?: boolean
+          sort_order?: number
+          title?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -254,6 +361,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const
