@@ -2,10 +2,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageHero } from "@/components/site/Section";
 import { FinalCta } from "@/components/site/FinalCta";
-import { portfolio } from "@/lib/site-data";
+import { getPublicContent } from '@/lib/content.functions';
 import design from "@/assets/svc-design.jpg";
 
 export const Route = createFileRoute("/work")({
+  loader: () => getPublicContent(),
   head: () => ({
     meta: [
       { title: "Our Work — Aevyrix Creation Hub" },
@@ -20,6 +21,7 @@ export const Route = createFileRoute("/work")({
 const cats = ["All", "AI Art and Visuals", "Video Editing", "AI Promotional Videos", "Graphic Design", "Website Development", "UI/UX", "Branding", "Digital Marketing"];
 
 function Work() {
+  const { portfolio } = Route.useLoaderData();
   const [cat, setCat] = useState("All");
   const items = portfolio.filter((p) => cat === "All" || p.category === cat);
   return (
