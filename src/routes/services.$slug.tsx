@@ -3,10 +3,11 @@ import { ArrowRight, Check, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PageHero } from "@/components/site/Section";
 import { FinalCta } from "@/components/site/FinalCta";
-import { services } from "@/lib/site-data";
+import { getPublicContent } from '@/lib/content.functions';
 
 export const Route = createFileRoute("/services/$slug")({
-  loader: ({ params }) => {
+  loader: async ({ params }) => {
+    const { services } = await getPublicContent();
     const service = services.find((s) => s.slug === params.slug);
     if (!service) throw notFound();
     return { service };
@@ -20,6 +21,9 @@ export const Route = createFileRoute("/services/$slug")({
         { name: "description", content: `${s.short} ${s.items.slice(0, 4).join(", ")} and more.` },
         { property: "og:title", content: `${s.name} — Aevyrix Creation Hub` },
         { property: "og:description", content: s.short },
+        { property: 'og:type', content: 'website' },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        ...(s.image.startsWith('https://') ? [{property:'og:image',content:s.image},{name:'twitter:image',content:s.image}] : []),
       ],
     };
   },

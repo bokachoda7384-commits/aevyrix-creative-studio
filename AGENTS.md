@@ -9,5 +9,7 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
-- Site content (services, packages, FAQ, portfolio, contact placeholders) lives in src/lib/site-data.ts — single source until the admin dashboard moves it to the database.
+- Packages, FAQ and contact placeholders remain in site-data; published site_content overlays service defaults and adds concept portfolio/team entries through public server functions, preserving the original artwork before owner content is supplied.
+- Admin operations use authenticated server functions plus database role policies; no self-service role assignment or automatic first-user admin, to prevent privilege escalation.
+- Quotations are saved as downloadable drafts only; saving does not imply email delivery, payment, or order confirmation.
 - Public forms insert through server functions in src/lib/forms.functions.ts using a publishable client + anon INSERT-only RLS; no public reads of inquiries/messages.

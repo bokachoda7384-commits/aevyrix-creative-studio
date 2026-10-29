@@ -4,11 +4,13 @@ import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/site/Section";
 import { CreativeEngine, Pipeline } from "@/components/site/Diagrams";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { services, packages, faqs, portfolio } from "@/lib/site-data";
+import { packages, faqs } from "@/lib/site-data";
+import { getPublicContent } from '@/lib/content.functions';
 import hero from "@/assets/hero-robot.jpg";
 import { FinalCta } from "@/components/site/FinalCta";
 
 export const Route = createFileRoute("/")({
+  loader: () => getPublicContent(),
   head: () => ({
     meta: [
       { title: "Aevyrix Creation Hub — AI-Powered Creative Agency" },
@@ -31,6 +33,7 @@ const why = [
 ];
 
 function Index() {
+  const { services, portfolio } = Route.useLoaderData();
   return (
     <>
       {/* Hero */}
@@ -76,7 +79,7 @@ function Index() {
               </Link>
             ))}
           </div>
-          <div className="mt-10 text-center"><Button asChild variant="glass" size="lg"><Link to="/services">View all 9 services</Link></Button></div>
+          <div className="mt-10 text-center"><Button asChild variant="glass" size="lg"><Link to="/services">View all services</Link></Button></div>
         </div>
       </section>
 

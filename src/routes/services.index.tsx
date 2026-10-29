@@ -3,10 +3,11 @@ import { ArrowRight } from "lucide-react";
 import { PageHero, SectionHeading } from "@/components/site/Section";
 import { GrowthEcosystem, WebArchitecture } from "@/components/site/Diagrams";
 import { FinalCta } from "@/components/site/FinalCta";
-import { services } from "@/lib/site-data";
+import { getPublicContent } from '@/lib/content.functions';
 import core from "@/assets/ai-core.jpg";
 
 export const Route = createFileRoute("/services/")({
+  loader: () => getPublicContent(),
   head: () => ({
     meta: [
       { title: "Services — Aevyrix Creation Hub" },
@@ -19,6 +20,7 @@ export const Route = createFileRoute("/services/")({
 });
 
 function ServicesPage() {
+  const { services } = Route.useLoaderData();
   return (
     <>
       <PageHero eyebrow="Service catalog" title={<>Everything your brand needs to <span className="text-gradient">stand out</span></>} text="Choose a single service or combine several into one connected launch." image={core} />

@@ -6,11 +6,13 @@ import { CheckCircle2, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { PageHero } from "@/components/site/Section";
-import { services, packages } from "@/lib/site-data";
+import { packages } from "@/lib/site-data";
+import { getPublicContent } from '@/lib/content.functions';
 import { submitInquiry } from "@/lib/forms.functions";
 import { inquirySchema } from "@/lib/form-schemas";
 
 export const Route = createFileRoute("/start")({
+  loader: () => getPublicContent(),
   validateSearch: z.object({ service: z.string().optional(), package: z.string().optional() }),
   head: () => ({
     meta: [
@@ -58,6 +60,7 @@ function F({ label, name, error, children, required }: { label: string; name: st
 }
 
 function Start() {
+  const { services } = Route.useLoaderData();
   const search = Route.useSearch();
   const submit = useServerFn(submitInquiry);
   const [category, setCategory] = useState(services.find((s) => s.slug === search.service)?.slug ?? "");
