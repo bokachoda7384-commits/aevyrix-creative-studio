@@ -1,4 +1,5 @@
 # Roadmap
+- [ ] Fix current website errors and verify pages, forms and access controls
 - [x] Design system, AI artwork, public pages, service pages, diagrams
 - [x] Project inquiry form (saved, reference number) + contact form
 - [ ] Admin dashboard with login & roles (inquiries, statuses, quotations, services, portfolio, team) — in progress
