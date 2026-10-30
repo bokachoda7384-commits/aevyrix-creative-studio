@@ -13,6 +13,8 @@ export const Route = createFileRoute("/work")({
       { name: "description", content: "AI visuals, video, design, websites and branding concept projects from Aevyrix Creation Hub." },
       { property: "og:title", content: "Our Work — Aevyrix Creation Hub" },
       { property: "og:description", content: "A showcase of our visual direction across disciplines." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Work,

@@ -7,6 +7,8 @@ export const Route = createFileRoute("/terms")({
       { name: "description", content: "Terms for working with Aevyrix Creation Hub: inquiries, quotations, payments and delivery." },
       { property: "og:title", content: "Terms and Conditions — Aevyrix Creation Hub" },
       { property: "og:description", content: "The terms of our services." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: () => (

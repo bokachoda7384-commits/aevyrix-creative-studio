@@ -11,6 +11,8 @@ export const Route = createFileRoute("/about")({
       { name: "description", content: "Aevyrix Creation Hub transforms ideas into powerful digital experiences through creativity, intelligent technology and next-generation design." },
       { property: "og:title", content: "About Aevyrix Creation Hub" },
       { property: "og:description", content: "Where artificial intelligence meets human creativity." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: About,
