@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Instagram, Linkedin, Mail, Phone } from "lucide-react";
+import { Facebook, Instagram, Mail, Phone } from "lucide-react";
 import mark from "@/assets/mark.png.asset.json";
 import { services, contact } from "@/lib/site-data";
 
@@ -13,7 +13,7 @@ export function Footer() {
             <img src={mark.url} alt="" width={40} height={40} className="h-10 w-10 rounded-md" loading="lazy" />
             <span className="font-display text-lg font-bold">Aevyrix Creation Hub</span>
           </div>
-          <p className="mt-3 text-sm text-gradient font-semibold tracking-wide">Imagine. Create. Elevate.</p>
+          <p className="mt-3 text-sm text-gradient font-semibold tracking-wide">Create. Innovate. Elevate.</p>
           <p className="mt-3 text-sm text-muted-foreground">Where artificial intelligence meets human creativity.</p>
         </div>
         <div>
@@ -38,12 +38,12 @@ export function Footer() {
         <div>
           <h3 className="eyebrow mb-4">Contact</h3>
           <ul className="space-y-3 text-sm text-muted-foreground">
-            <li className="flex items-center gap-2"><Mail className="h-4 w-4 text-cyan" />{contact.email}</li>
-            <li className="flex items-center gap-2"><Phone className="h-4 w-4 text-cyan" />{contact.phone}</li>
+            <li className="flex items-start gap-2"><Mail className="mt-0.5 h-4 w-4 shrink-0 text-cyan" /><a href={`mailto:${contact.email}`} className="break-all hover:text-foreground">{contact.email}</a></li>
+            {contact.phones.map(phone => <li key={phone} className="flex items-center gap-2"><Phone className="h-4 w-4 shrink-0 text-cyan" /><a href={`tel:${phone.replaceAll(' ', '')}`} className="hover:text-foreground">{phone}</a></li>)}
           </ul>
           <div className="mt-4 flex gap-3">
-            <a href={contact.instagram} aria-label="Instagram" className="glass rounded-full p-2 hover:text-cyan"><Instagram className="h-4 w-4" /></a>
-            <a href={contact.linkedin} aria-label="LinkedIn" className="glass rounded-full p-2 hover:text-cyan"><Linkedin className="h-4 w-4" /></a>
+            <a href={contact.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="glass rounded-full p-2 hover:text-cyan"><Facebook className="h-4 w-4" /></a>
+            <a href={contact.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="glass rounded-full p-2 hover:text-cyan"><Instagram className="h-4 w-4" /></a>
           </div>
         </div>
       </div>

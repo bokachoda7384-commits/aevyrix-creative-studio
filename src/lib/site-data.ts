@@ -64,8 +64,8 @@ export const portfolio = [
 ];
 
 export const contact = {
-  email: "[INSERT EMAIL]",
-  phone: "[INSERT NUMBER]",
-  instagram: "#",
-  linkedin: "#",
+  email: "aevyrixcreationhub@gmail.com",
+  phones: ["+91 7029618002", "+91 8538014211", "+91 6284922078"],
+  facebook: "https://www.facebook.com/share/14stCJzcjMj/",
+  instagram: "https://www.instagram.com/aevyrixcreationhub?dlrf=cDc5NnAyc3c2YnQz",
 };
