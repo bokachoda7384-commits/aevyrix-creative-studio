@@ -20,6 +20,8 @@ export const Route = createFileRoute("/start")({
       { name: "description", content: "Share your project brief and receive a written quotation from Aevyrix Creation Hub." },
       { property: "og:title", content: "Start Your Project — Aevyrix Creation Hub" },
       { property: "og:description", content: "Tell us about your idea. We'll reply with a plan and quotation." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Start,

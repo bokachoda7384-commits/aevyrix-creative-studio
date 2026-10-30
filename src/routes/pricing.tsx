@@ -11,6 +11,8 @@ export const Route = createFileRoute("/pricing")({
       { name: "description", content: "Starter, Growth, Professional and Custom packages in Indian Rupees, with clear inclusions and third-party costs." },
       { property: "og:title", content: "Pricing — Aevyrix Creation Hub" },
       { property: "og:description", content: "Transparent starting prices and written quotations." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Pricing,

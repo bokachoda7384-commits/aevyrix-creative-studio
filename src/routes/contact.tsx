@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
-import { Loader2, Mail, MessageCircle, Phone } from "lucide-react";
+import { Facebook, Instagram, Loader2, Mail, Phone } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { PageHero } from "@/components/site/Section";
@@ -17,6 +17,8 @@ export const Route = createFileRoute("/contact")({
       { name: "description", content: "Get in touch with Aevyrix Creation Hub by email, phone or the contact form." },
       { property: "og:title", content: "Contact Aevyrix Creation Hub" },
       { property: "og:description", content: "Let's talk about your next project." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Contact,
@@ -49,14 +51,18 @@ function Contact() {
 
   return (
     <>
-      <PageHero eyebrow="Contact" title={<>Let's <span className="text-gradient">connect</span></>} text="Questions, ideas or partnerships — we'd love to hear from you." image={core} />
+      <PageHero eyebrow="Contact" title={<>Let's Create Something <span className="text-gradient">Exceptional.</span></>} text="Have a project in mind? Get in touch with Aevyrix Creation Hub to discuss your ideas, requirements, and potential collaboration." image={core} />
       <section className="mx-auto grid max-w-7xl gap-8 px-5 pb-24 lg:grid-cols-[1fr_1.4fr]">
         <div className="space-y-4">
-          {[{ icon: Mail, l: "Email", v: contact.email }, { icon: Phone, l: "Phone / WhatsApp", v: contact.phone }, { icon: MessageCircle, l: "WhatsApp chat", v: "Available once number is configured" }].map(({ icon: Icon, l, v }) => (
-            <div key={l} className="glass flex items-center gap-4 rounded-2xl p-5">
-              <Icon className="h-6 w-6 text-cyan" /><div><p className="text-sm text-muted-foreground">{l}</p><p className="font-medium">{v}</p></div>
-            </div>
+          {[{ icon: Mail, l: "Email", v: contact.email, href: `mailto:${contact.email}` }, ...contact.phones.map(phone => ({ icon: Phone, l: 'Phone', v: phone, href: `tel:${phone.replaceAll(' ', '')}` }))].map(({ icon: Icon, l, v, href }) => (
+            <a key={v} href={href} className="glass flex items-center gap-4 rounded-lg p-5 transition-colors hover:border-cyan/50">
+              <Icon className="h-6 w-6 shrink-0 text-cyan" /><div className="min-w-0"><p className="text-sm text-muted-foreground">{l}</p><p className="break-all font-medium">{v}</p></div>
+            </a>
           ))}
+          <div className="flex flex-wrap gap-3">
+            <Button asChild variant="glass"><a href={contact.facebook} target="_blank" rel="noopener noreferrer"><Facebook />Facebook</a></Button>
+            <Button asChild variant="glass"><a href={contact.instagram} target="_blank" rel="noopener noreferrer"><Instagram />Instagram</a></Button>
+          </div>
           <div className="rounded-2xl border border-border bg-card p-6">
             <p className="font-display text-lg font-semibold">Have a project in mind?</p>
             <p className="mt-1 text-sm text-muted-foreground">Our project form gets you a reference number and a faster quotation.</p>

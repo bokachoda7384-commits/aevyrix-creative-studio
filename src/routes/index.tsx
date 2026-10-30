@@ -8,15 +8,19 @@ import { packages, faqs } from "@/lib/site-data";
 import { getPublicContent } from '@/lib/content.functions';
 import hero from "@/assets/hero-robot.jpg";
 import { FinalCta } from "@/components/site/FinalCta";
+import { TeamGrid } from '@/components/site/TeamGrid';
+import { mergeTeamProfiles } from '@/lib/team-data';
 
 export const Route = createFileRoute("/")({
   loader: () => getPublicContent(),
   head: () => ({
     meta: [
       { title: "Aevyrix Creation Hub — AI-Powered Creative Agency" },
-      { name: "description", content: "AI-powered creativity, cinematic content, professional websites and branding for ambitious brands. Imagine. Create. Elevate." },
+      { name: "description", content: "AI-powered creativity, cinematic content, professional websites and branding for ambitious brands. Create. Innovate. Elevate." },
       { property: "og:title", content: "Aevyrix Creation Hub — AI-Powered Creative Agency" },
       { property: "og:description", content: "Video editing, AI videos, graphic design, websites, UI/UX, branding and digital marketing." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Index,
@@ -33,7 +37,7 @@ const why = [
 ];
 
 function Index() {
-  const { services, portfolio } = Route.useLoaderData();
+  const { services, portfolio, team } = Route.useLoaderData();
   return (
     <>
       {/* Hero */}
@@ -164,9 +168,10 @@ function Index() {
 
       {/* Team */}
       <section className="bg-surface py-24">
-        <div className="mx-auto max-w-4xl px-5 text-center">
-          <SectionHeading center eyebrow="The team" title="Real people behind the machines" text="Our team profiles are being prepared. Meet the roles that bring your project to life." />
-          <Button asChild variant="glass" size="lg" className="mt-8"><Link to="/team">Meet the team</Link></Button>
+        <div className="mx-auto max-w-7xl px-5">
+          <SectionHeading center eyebrow="The team" title="Real people behind the machines" text="Meet the people leading our creative, technology and business teams." />
+          <div className="mt-12"><TeamGrid people={mergeTeamProfiles(team)} /></div>
+          <div className="text-center"><Button asChild variant="glass" size="lg" className="mt-8"><Link to="/team">Meet the team</Link></Button></div>
         </div>
       </section>
 

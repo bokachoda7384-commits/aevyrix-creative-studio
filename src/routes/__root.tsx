@@ -62,7 +62,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Aevyrix Creation Hub — Imagine. Create. Elevate." },
+      { title: "Aevyrix Creation Hub — Create. Innovate. Elevate." },
       { name: "description", content: "AI-powered creative agency for video, design, websites, branding and digital marketing." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

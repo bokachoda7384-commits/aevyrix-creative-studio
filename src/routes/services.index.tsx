@@ -14,6 +14,8 @@ export const Route = createFileRoute("/services/")({
       { name: "description", content: "Video editing, AI videos, graphic design, website development, UI/UX, branding, social media and digital marketing services." },
       { property: "og:title", content: "Services — Aevyrix Creation Hub" },
       { property: "og:description", content: "Nine creative and digital services, one connected team." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: ServicesPage,

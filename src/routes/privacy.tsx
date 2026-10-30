@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { contact } from '@/lib/site-data';
 
 export const Route = createFileRoute("/privacy")({
   head: () => ({
@@ -7,6 +8,8 @@ export const Route = createFileRoute("/privacy")({
       { name: "description", content: "How Aevyrix Creation Hub collects, uses and protects your information." },
       { property: "og:title", content: "Privacy Policy — Aevyrix Creation Hub" },
       { property: "og:description", content: "How we handle your data." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: () => (
@@ -20,7 +23,7 @@ export const Route = createFileRoute("/privacy")({
       <h2 className="pt-4 text-xl font-semibold text-foreground">Storage and retention</h2>
       <p>Submissions are stored securely and are accessible only to authorised team members. You can ask us to delete your data at any time.</p>
       <h2 className="pt-4 text-xl font-semibold text-foreground">Contact</h2>
-      <p>For privacy requests, email [INSERT EMAIL].</p>
+      <p>For privacy requests, email <a href={`mailto:${contact.email}`} className="break-all text-cyan underline">{contact.email}</a>.</p>
     </article>
   ),
 });

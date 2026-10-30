@@ -5,4 +5,5 @@
 - [ ] File uploads on inquiry form
 - [ ] Email notifications — needs sender domain
 - [ ] Razorpay payments — needs Razorpay account keys
-- [ ] Real contact details, team profiles, final prices — waiting on owner
+- [x] Official team portraits in upload order, clickable contact details, social links and updated tagline — tested on mobile and desktop
+- [ ] Final prices — waiting on owner

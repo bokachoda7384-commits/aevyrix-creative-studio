@@ -9,7 +9,8 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
-- Packages, FAQ and contact placeholders remain in site-data; published site_content overlays service defaults and adds concept portfolio/team entries through public server functions, preserving the original artwork before owner content is supplied.
+- Packages, FAQ and official contacts remain in site-data; published site_content overlays service defaults and adds concept portfolio entries through public server functions, preserving the original artwork before owner content is supplied.
+- Official team defaults live in team-data and use one shared TeamGrid on home and team pages; published CMS profiles override matching keys or names without duplication so owner edits remain supported.
 - Admin operations use authenticated server functions plus database role policies; no self-service role assignment or automatic first-user admin, to prevent privilege escalation.
 - Quotations are saved as downloadable drafts only; saving does not imply email delivery, payment, or order confirmation.
 - Public forms insert through server functions in src/lib/forms.functions.ts using a publishable client + anon INSERT-only RLS; no public reads of inquiries/messages.
