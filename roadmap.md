@@ -1,5 +1,6 @@
 # Roadmap
 - [ ] Complete remaining error review: automatic TypeScript/build checks, regression tests, pages, form saves and access controls
+- [ ] Review Google and AI search visibility, correct confirmed issues, and research realistic ranking opportunities
 - [x] Design system, AI artwork, public pages, service pages, diagrams
 - [x] Project inquiry form (saved, reference number) + contact form
 - [ ] Admin dashboard with login & roles (inquiries, statuses, quotations, services, portfolio, team) — in progress
