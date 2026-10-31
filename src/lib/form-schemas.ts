@@ -17,7 +17,10 @@ export const inquirySchema = z.object({
   preferred_style: opt(500),
   deliverables: opt(1000),
   budget_range: opt(60),
-  deadline: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional().or(z.literal("")),
+  deadline: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Enter a valid date").refine((value) => {
+    const date = new Date(`${value}T00:00:00.000Z`);
+    return Number.isFinite(date.getTime()) && date.toISOString().slice(0, 10) === value;
+  }, "Enter a real calendar date").optional().or(z.literal("")),
   reference_links: opt(1000),
   additional_requirements: opt(2000),
   service_details: z.record(z.string(), z.string().max(300)).default({}),
