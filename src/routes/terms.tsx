@@ -9,7 +9,9 @@ export const Route = createFileRoute("/terms")({
       { property: "og:description", content: "The terms of our services." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "/terms" },
     ],
+    links: [{ rel: "canonical", href: "/terms" }],
   }),
   component: () => (
     <article className="mx-auto max-w-3xl space-y-5 px-5 pb-24 pt-32 text-muted-foreground">

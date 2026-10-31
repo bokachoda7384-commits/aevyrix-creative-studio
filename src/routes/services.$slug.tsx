@@ -23,8 +23,15 @@ export const Route = createFileRoute("/services/$slug")({
         { property: "og:description", content: s.short },
         { property: 'og:type', content: 'website' },
         { name: 'twitter:card', content: 'summary_large_image' },
+        { property: 'og:url', content: `/services/${s.slug}` },
         ...(s.image.startsWith('https://') ? [{property:'og:image',content:s.image},{name:'twitter:image',content:s.image}] : []),
       ],
+      links: [{ rel: 'canonical', href: `/services/${s.slug}` }],
+      scripts: [{ type: 'application/ld+json', children: JSON.stringify({
+        '@context': 'https://schema.org', '@type': 'Service', name: s.name,
+        description: s.short, serviceType: s.name,
+        provider: { '@type': 'Organization', name: 'Aevyrix Creation Hub' },
+      }) }],
     };
   },
   component: ServicePage,

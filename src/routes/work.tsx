@@ -15,7 +15,9 @@ export const Route = createFileRoute("/work")({
       { property: "og:description", content: "A showcase of our visual direction across disciplines." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "/work" },
     ],
+    links: [{ rel: "canonical", href: "/work" }],
   }),
   component: Work,
 });

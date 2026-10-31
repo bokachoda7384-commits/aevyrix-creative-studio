@@ -13,7 +13,9 @@ export const Route = createFileRoute("/about")({
       { property: "og:description", content: "Where artificial intelligence meets human creativity." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "/about" },
     ],
+    links: [{ rel: "canonical", href: "/about" }],
   }),
   component: About,
 });

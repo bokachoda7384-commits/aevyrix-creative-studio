@@ -10,7 +10,9 @@ export const Route = createFileRoute("/privacy")({
       { property: "og:description", content: "How we handle your data." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "/privacy" },
     ],
+    links: [{ rel: "canonical", href: "/privacy" }],
   }),
   component: () => (
     <article className="mx-auto max-w-3xl space-y-5 px-5 pb-24 pt-32 text-muted-foreground">

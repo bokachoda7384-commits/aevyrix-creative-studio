@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/site/Section";
 import { CreativeEngine, Pipeline } from "@/components/site/Diagrams";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { packages, faqs } from "@/lib/site-data";
+import { packages, faqs, contact } from "@/lib/site-data";
 import { getPublicContent } from '@/lib/content.functions';
 import hero from "@/assets/hero-robot.jpg";
 import { FinalCta } from "@/components/site/FinalCta";
@@ -21,7 +21,15 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: "Video editing, AI videos, graphic design, websites, UI/UX, branding and digital marketing." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "/" },
     ],
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [{ type: "application/ld+json", children: JSON.stringify({
+      '@context': 'https://schema.org', '@type': 'Organization',
+      name: 'Aevyrix Creation Hub', description: 'AI-assisted creative agency offering video editing, design, website development, branding and digital marketing.',
+      email: contact.email, telephone: contact.phones,
+      sameAs: [contact.facebook, contact.instagram],
+    }) }],
   }),
   component: Index,
 });
