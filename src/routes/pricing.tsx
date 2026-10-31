@@ -13,7 +13,9 @@ export const Route = createFileRoute("/pricing")({
       { property: "og:description", content: "Transparent starting prices and written quotations." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "/pricing" },
     ],
+    links: [{ rel: "canonical", href: "/pricing" }],
   }),
   component: Pricing,
 });

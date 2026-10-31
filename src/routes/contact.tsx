@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { Facebook, Instagram, Loader2, Mail, Phone } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -19,7 +19,9 @@ export const Route = createFileRoute("/contact")({
       { property: "og:description", content: "Let's talk about your next project." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "/contact" },
     ],
+    links: [{ rel: "canonical", href: "/contact" }],
   }),
   component: Contact,
 });
@@ -32,7 +34,7 @@ function Contact() {
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const fd = new FormData(form);

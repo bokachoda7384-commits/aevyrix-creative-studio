@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useState, type ReactNode } from "react";
+import { useState, type FormEvent, type ReactNode } from "react";
 import { z } from "zod";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import { toast } from "sonner";
@@ -22,7 +22,9 @@ export const Route = createFileRoute("/start")({
       { property: "og:description", content: "Tell us about your idea. We'll reply with a plan and quotation." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "/start" },
     ],
+    links: [{ rel: "canonical", href: "/start" }],
   }),
   component: Start,
 });
@@ -71,7 +73,7 @@ function Start() {
   const [done, setDone] = useState<string | null>(null);
   const svc = services.find((s) => s.slug === category);
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     const get = (k: string) => String(fd.get(k) ?? "");

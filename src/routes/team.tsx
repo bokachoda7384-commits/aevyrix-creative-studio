@@ -15,7 +15,9 @@ export const Route = createFileRoute("/team")({
       { property: "og:description", content: "The people behind the work." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "/team" },
     ],
+    links: [{ rel: "canonical", href: "/team" }],
   }),
   component: Team,
 });
