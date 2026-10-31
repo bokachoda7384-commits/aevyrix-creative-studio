@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { Brain, Clapperboard, Globe, Megaphone, Palette, PenLine, Sparkles } from "lucide-react";
 import core from "@/assets/ai-core.jpg";
+import { Button } from "@/components/ui/button";
+
+// Quantize coordinates so server and browser math serialize identically.
+const coordinate = (value: number) => Math.round(value * 10000) / 10000;
 
 /** Horizontal animated pipeline (Diagram 1 & 4) */
 export function Pipeline({ steps, label }: { steps: string[]; label: string }) {
@@ -36,6 +40,8 @@ const engineNodes = [
 /** Diagram 3: radial AI creative engine */
 export function CreativeEngine() {
   const [active, setActive] = useState(0);
+  const activeNode = engineNodes[active] ?? engineNodes[0];
+  if (!activeNode) return null;
   const R = 40;
   return (
     <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_1fr]">
@@ -45,7 +51,7 @@ export function CreativeEngine() {
           <circle cx="50" cy="50" r="28" fill="none" stroke="var(--primary)" strokeOpacity=".3" strokeWidth="0.2" strokeDasharray="1 2" className="origin-center animate-spin-slow" style={{ transformBox: "fill-box" }} />
           {engineNodes.map((_, i) => {
             const a = (i / engineNodes.length) * Math.PI * 2 - Math.PI / 2;
-            return <line key={i} x1="50" y1="50" x2={50 + R * Math.cos(a)} y2={50 + R * Math.sin(a)}
+            return <line key={i} x1="50" y1="50" x2={coordinate(50 + R * Math.cos(a))} y2={coordinate(50 + R * Math.sin(a))}
               stroke={i === active ? "var(--cyan)" : "var(--primary)"} strokeOpacity={i === active ? 1 : 0.35} strokeWidth="0.35" className="animate-flow" />;
           })}
         </svg>
@@ -55,20 +61,20 @@ export function CreativeEngine() {
           const a = (i / engineNodes.length) * Math.PI * 2 - Math.PI / 2;
           const Icon = n.icon;
           return (
-            <button key={n.label} onClick={() => setActive(i)} onMouseEnter={() => setActive(i)} aria-pressed={i === active}
-              className={`absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1.5 rounded-xl px-2 py-2 text-center transition-all ${i === active ? "glass shadow-glow text-cyan" : "text-muted-foreground hover:text-foreground"}`}
-              style={{ left: `${50 + R * Math.cos(a)}%`, top: `${50 + R * Math.sin(a)}%` }}>
+            <Button variant="ghost" key={n.label} onClick={() => setActive(i)} onMouseEnter={() => setActive(i)} aria-pressed={i === active}
+              className={`absolute h-auto flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1.5 rounded-xl px-2 py-2 text-center transition-all ${i === active ? "glass shadow-glow text-cyan" : "text-muted-foreground hover:text-foreground"}`}
+              style={{ left: `${coordinate(50 + R * Math.cos(a))}%`, top: `${coordinate(50 + R * Math.sin(a))}%` }}>
               <Icon className="h-5 w-5" />
               <span className="max-w-[90px] text-[11px] font-medium leading-tight sm:text-xs">{n.label}</span>
-            </button>
+            </Button>
           );
         })}
       </div>
       <div className="glass rounded-2xl p-8" aria-live="polite">
         <Brain className="h-8 w-8 text-cyan" />
         <p className="eyebrow mt-4">Engine module</p>
-        <h3 className="mt-2 text-2xl font-bold">{engineNodes[active]!.label}</h3>
-        <p className="mt-3 text-muted-foreground">{engineNodes[active]!.text}</p>
+        <h3 className="mt-2 text-2xl font-bold">{activeNode.label}</h3>
+        <p className="mt-3 text-muted-foreground">{activeNode.text}</p>
         <p className="mt-6 text-sm text-muted-foreground">Every module shares one brief, one brand system and one team — so your video, website and campaigns feel like the same brand.</p>
       </div>
     </div>
@@ -114,7 +120,7 @@ export function WebArchitecture() {
 /** Diagram 5: growth ecosystem */
 export function GrowthEcosystem() {
   const items = ["Website", "Content", "Branding", "SEO", "Social Media", "Digital Promotion"];
-  const pos = items.map((_, i) => { const a = (i / items.length) * Math.PI * 2; return [50 + 36 * Math.cos(a), 50 + 36 * Math.sin(a)]; });
+  const pos = items.map((_, i) => { const a = (i / items.length) * Math.PI * 2; return [coordinate(50 + 36 * Math.cos(a)), coordinate(50 + 36 * Math.sin(a))]; });
   return (
     <div className="relative mx-auto aspect-[4/3] w-full max-w-2xl">
       <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 h-full w-full" aria-hidden>
@@ -124,7 +130,7 @@ export function GrowthEcosystem() {
       </svg>
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-deep px-5 py-3 font-display text-sm font-bold shadow-glow">Your Brand</div>
       {items.map((t, i) => (
-        <span key={t} className="glass absolute -translate-x-1/2 -translate-y-1/2 rounded-full px-3 py-1.5 text-xs font-medium sm:text-sm" style={{ left: `${pos[i]![0]}%`, top: `${pos[i]![1]}%` }}>{t}</span>
+        <span key={t} className="glass absolute -translate-x-1/2 -translate-y-1/2 rounded-full px-3 py-1.5 text-xs font-medium sm:text-sm" style={{ left: `${pos[i]?.[0]}%`, top: `${pos[i]?.[1]}%` }}>{t}</span>
       ))}
     </div>
   );
