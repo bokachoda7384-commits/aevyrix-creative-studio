@@ -1,5 +1,6 @@
 # Roadmap
-- [ ] Complete remaining error review: automatic TypeScript/build checks, regression tests, pages, form saves and access controls
+- [x] Public error review: automatic build passed, 14 regression tests passed, 20 public pages checked, both form saves verified and test records removed
+- [ ] Signed-in admin verification — blocked: no registered account or approved administrator exists
 - [ ] Review Google and AI search visibility, correct confirmed issues, and research realistic ranking opportunities
 - [x] Design system, AI artwork, public pages, service pages, diagrams
 - [x] Project inquiry form (saved, reference number) + contact form
